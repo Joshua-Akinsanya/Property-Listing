@@ -7,7 +7,7 @@ export default function CheckboxInput({name, groupName}) {
         className="peer hidden"
       />
       <label htmlFor={name}
-        className="cursor-pointer inline-block px-4 py-2 rounded peer-checked:bg-gray-op40 transition"
+        className="cursor-pointer inline-block px-3 py-2 rounded peer-checked:bg-gray-op40 transition"
       >{name}</label>
     </>
   )

@@ -11,15 +11,13 @@ function App() {
   useEffect(() => {
     setPropertyList(data)
   }, [data])
-
-  console.log(propertyList)
-
+  
   return (
-    <div className="font-display text-white bg-darkblue min-h-screen">
+    <div className="font-display text-white bg-black min-h-screen">
       <HeroSection background={heroImage} />
       <FilterMenu />
-      <PropertyList />
-      {propertyList.map((property) => <p key={property.id}>{property.title}</p>)}
+      <PropertyList properties={propertyList} />
+      <div className="min-h-20"></div>
     </div>
   )
 }

@@ -8,12 +8,14 @@
   --color-blue: #4E80EE;
   --color-yellow: #F6C768;
   --color-darkblue: #20293A;
-  --color-darkblue-opf2: #2029;
+  --color-darkblue-opf2: #20293AF2;
+
+  --text-2xs: 0.625rem;
 
   --font-display: 'Outfit', sans-serif;
 }
 
 @font-face {
   font-family: 'Outfit';
-  src: url('./outfit/OutfitVariableFont_wght1.ttf');
+  src: url('/outfit/OutfitVariableFont_wght1.ttf');
 }
