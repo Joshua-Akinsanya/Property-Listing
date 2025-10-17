@@ -6,6 +6,7 @@ export default function CardProperty({property}) {
   return (
     <div className="relative border-solid border-1 border-gray-op40 rounded-2xl overflow-hidden">
       <img src={property.image} alt="" loading="lazy"
+        width="358" height="200"
         className='w-full'
       />
       {
@@ -18,11 +19,11 @@ export default function CardProperty({property}) {
           <div className='text-xs flex flex-wrap gap-4 my-4'>
             <div className="flex items-center gap-1">
               <img src={homeIcon} alt="" />
-              <p>{property.capacity.people} bedroom</p>
+              <p>{property.capacity.bedroom} bedroom</p>
             </div>
             <div className="flex items-center gap-1">
               <img src={userIcon} alt="" />
-              <p>{property.capacity.bedroom} guests</p>
+              <p>{property.capacity.people} guests</p>
             </div>
           </div>
         </div>

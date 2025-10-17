@@ -1,5 +1,4 @@
-import FilterMenu from "./FilterMenu";
 import HeroSection from "./HeroSection";
-import PropertyList from "./PropertyList";
+import DisplayProperties from "./DisplayProperties";
 
-export { FilterMenu, HeroSection, PropertyList }
+export { HeroSection, DisplayProperties }
