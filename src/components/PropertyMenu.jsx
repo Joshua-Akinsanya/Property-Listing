@@ -67,7 +67,7 @@ export default function PropertyMenu() {
 			{propertyList.length > 0
 				?<>
 						<div className="mx-[8.33%] mb-10">
-							<search className="bg-darkblue-opf2 border-1 border-gray-op40 rounded-xl py-8 px-10 flex justify-between flex-wrap -translate-y-4 lg:-translate-y-1/2">
+							<search className="bg-darkblue-opf2 border-1 border-gray-op40 rounded-xl py-8 px-10 flex justify-between items-center flex-wrap -translate-y-4 lg:-translate-y-1/2 space-y-1">
 								<menu className="flex gap-3 flex-wrap">
 									{locationOptions.map( option => {
 										return (
@@ -81,13 +81,21 @@ export default function PropertyMenu() {
 									} )}
 								</menu>
 
-								<div className="space-x-5">
-									<div className="inline-flex items-center gap-2">
-										<input type="checkbox" name="" id="superhost"
-											checked={onlySuperhost}
-											onChange={() => setOnlySuperhost(prev => !prev)}
-										/>
-										<label htmlFor="superhost">Superhost</label>
+								<div className="flex gap-5 flex-wrap">
+									<div className="flex items-center gap-2">
+										<label htmlFor="superhost" 
+											className='cursor-pointer inline-flex items-center'
+										>
+											<input type="checkbox" name="" id="superhost"
+												className='sr-only'
+												checked={onlySuperhost}
+												onChange={() => setOnlySuperhost(prev => !prev)}
+											/>
+											<div className={`w-11 h-6 ${onlySuperhost?'bg-blue':'bg-gray-300'} rounded-full relative transition-colors duration-300`}>
+												<div className={`size-5 bg-white rounded-full shadow absolute top-0.5 left-0.5 ${onlySuperhost && 'translate-x-5'} transition-transform duration-300`}></div>
+											</div>
+											<span className='ml-2'>Superhost</span>
+										</label>
 									</div>
 									<select name="property" id=""
 										className="border-solid border-1 rounded-lg px-6 py-3"
