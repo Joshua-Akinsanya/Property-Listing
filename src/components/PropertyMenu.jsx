@@ -3,30 +3,30 @@ import { useFetchData } from '../hooks/useFetchData'
 import { DisplayProperties } from "./index"
 
 export default function PropertyMenu() {
-	const [propertyList, setPropertyList] = useState([]) // All data
-	const [filteredPropertyList, setfilteredPropertyList] = useState([]) // Filterable data to be displayed
+	const fullPropertyList = useFetchData()
 
+	const [propertyList, setPropertyList] = useState(fullPropertyList) // All data
+	const [filteredPropertyList, setfilteredPropertyList] = useState(fullPropertyList) // Filterable data to be displayed
+	
 	// Filtering States
 	const [locationOptions, setLocationOptions] = useState([]) // Options are set dynamically in a UseEffect to avoid hard coding the values
 	const [selectedLocations, setSelectedLocations] = useState([])
 	const [onlySuperhost, setOnlySuperhost] = useState(false)
 	const [bedroomSize, setBedroomSize] = useState(0)
-  
-	const data = useFetchData()
 
   useEffect(() => {
-		setPropertyList(data)
-		setfilteredPropertyList(propertyList)
+		setPropertyList(fullPropertyList)
+		setfilteredPropertyList(fullPropertyList)
 
 		// Checkbox Input will use this array for filter options
 		// Location Filter Options are set dynamically to avoid hard coding the values
-		if(data.length > 0){
-			const locationsArray = data.map(property => property.location) // This array may contain duplicates
+		if(fullPropertyList.length > 0){
+			const locationsArray = fullPropertyList.map(property => property.location) // This array may contain duplicates
 			setLocationOptions(() => ["All Stays", ...locationsArray])
 			setLocationOptions((prev) => new Set(prev))
 			setLocationOptions((prev) => [...prev])
 		}
-  }, [data])
+  }, [fullPropertyList])
 
 	const handleSelect = (selectedOption) => {
 		if( !selectedLocations.includes(selectedOption) ) {
@@ -60,12 +60,13 @@ export default function PropertyMenu() {
 				setfilteredPropertyList((prevArray) => prevArray.filter(item => item.capacity.bedroom == bedroomSize))
 			}
 		}
+		
 	}, [selectedLocations, onlySuperhost, bedroomSize])
 
 	return (
 		<>
 			{propertyList.length > 0
-				?<>
+				&& (<>
 						<div className="mx-[8.33%] mb-10">
 							<search className="bg-darkblue-opf2 border-1 border-gray-op40 rounded-xl py-8 px-10 flex justify-between items-center flex-wrap -translate-y-4 lg:-translate-y-1/2 space-y-1">
 								<menu className="flex gap-3 flex-wrap">
@@ -84,7 +85,7 @@ export default function PropertyMenu() {
 								<div className="flex gap-5 flex-wrap">
 									<div className="flex items-center gap-2">
 										<label htmlFor="superhost" 
-											className='cursor-pointer inline-flex items-center'
+											className='cursor-pointer inline-flex flex-wrap items-center'
 										>
 											<input type="checkbox" name="" id="superhost"
 												className='sr-only'
@@ -98,7 +99,7 @@ export default function PropertyMenu() {
 										</label>
 									</div>
 									<select name="property" id=""
-										className="border-solid border-1 rounded-lg px-6 py-3"
+										className="boinitializationrder-solid border-1 rounded-lg px-6 py-3"
 										value={bedroomSize}
 										onChange={(e) => setBedroomSize(Number(e.target.value))}
 									>
@@ -110,9 +111,7 @@ export default function PropertyMenu() {
 							</search>
 						</div>
 						<DisplayProperties propertyList={filteredPropertyList} />
-					</>
-				:
-					<span className='block mt-12 mx-auto w-5/6 text-center text-red-500 text-3xl'>An Error occurred !</span>
+				</>)
 			}
 		</>
 	)
